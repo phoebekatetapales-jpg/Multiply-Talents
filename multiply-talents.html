@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Multiply Talents — Strategy, Talent &amp; Automation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#2E5BFF}a:hover{color:#1A3FD1}
+.mt{--navy:#0B1630;--navy2:#13224A;--ink:#101828;--muted:#475467;--line:#E4E7EE;--soft:#F5F7FB;--onnavy:#B9C4DC;font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased}
+.mt *{box-sizing:border-box}
+.mt h1,.mt h2,.mt h3,.mt h4{font-family:'Plus Jakarta Sans','Inter',sans-serif;margin:0;letter-spacing:-0.02em}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+
+/* NAV */
+.nav{background:var(--navy);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:18px 0}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff}
+.logo:hover{color:#fff}
+.logo-mark{width:40px;height:40px;border-radius:10px;background:var(--accent);display:grid;place-items:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:22px;color:#fff;transform:rotate(-6deg);transition:transform .3s}
+.logo:hover .logo-mark{transform:rotate(0)}
+.logo-txt{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:19px;line-height:1.05}
+.logo-txt span{display:block;font-weight:500;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--onnavy);margin-top:3px}
+.menu{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.menu a{color:#DCE3F2;text-decoration:none;font-size:15px;font-weight:500;padding:10px 14px;border-radius:8px;transition:background .2s,color .2s;min-height:44px;display:inline-flex;align-items:center}
+.menu a:hover{background:rgba(255,255,255,.08);color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 24px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;transition:transform .2s,box-shadow .2s,background .2s;cursor:pointer;border:0;font-family:inherit}
+.btn:hover{transform:translateY(-2px)}
+.btn-hi{background:var(--hi);color:#1A1200}
+.btn-hi:hover{color:#1A1200;box-shadow:0 12px 28px -10px var(--hi)}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35)}
+.btn-ghost:hover{color:#fff;border-color:#fff}
+.btn-blue{background:var(--accent);color:#fff}
+.btn-blue:hover{color:#fff;box-shadow:0 12px 28px -10px var(--accent)}
+
+/* HERO */
+.hero{background:var(--navy);color:#fff;position:relative;overflow:hidden;padding:96px 0 120px}
+.hero-x{position:absolute;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:rgba(255,255,255,.05);line-height:1;user-select:none;pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:64px;align-items:center;position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.eyebrow i{width:28px;height:2px;background:currentColor;display:inline-block}
+.hero h1{font-size:62px;line-height:1.05;font-weight:800;margin-top:22px}
+.hl{color:var(--hi);position:relative;white-space:nowrap}
+.hero-sub{font-size:19px;line-height:1.6;color:var(--onnavy);max-width:560px;margin:26px 0 38px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap}
+.pillars{display:flex;flex-direction:column;gap:16px}
+.pillar{background:var(--navy2);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:24px 26px;display:flex;gap:20px;align-items:center;transition:transform .3s,border-color .3s,background .3s}
+.pillar:hover{transform:translateX(-8px);border-color:var(--hi);background:#172A5A}
+.pillar:nth-child(2){margin-left:36px}
+.pillar:nth-child(3){margin-left:72px}
+.p-ico{width:56px;height:56px;border-radius:14px;flex:none;display:grid;place-items:center;background:rgba(255,255,255,.06);color:var(--hi)}
+.pillar h3{font-size:21px;font-weight:700}
+.pillar p{margin:4px 0 0;color:var(--onnavy);font-size:15px;line-height:1.5}
+.times{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:var(--hi);font-size:20px;text-align:center;margin:-6px 0;padding-left:60px}
+
+/* INDUSTRIES STRIP */
+.strip{background:var(--accent);color:#fff;overflow:hidden}
+.strip-in{display:flex;gap:40px;align-items:center;padding:22px 0;white-space:nowrap;animation:marq 30s linear infinite;width:max-content}
+.strip-in span{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;display:inline-flex;align-items:center;gap:40px}
+.strip-in span::after{content:'×';color:var(--hi);font-size:24px}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTION BASICS */
+.sec{padding:112px 0}
+.sec-soft{background:var(--soft)}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:56px}
+.sec-head h2{font-size:46px;line-height:1.1;font-weight:800;max-width:640px}
+.sec-head p{max-width:420px;color:var(--muted);font-size:17px;line-height:1.6;margin:0}
+.kicker{color:var(--accent);margin-bottom:16px}
+
+/* SERVICES */
+.svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.svc{position:relative;background:#fff;border:1px solid var(--line);border-radius:22px;padding:34px 30px 30px;display:flex;flex-direction:column;gap:14px;transition:transform .3s,box-shadow .3s,border-color .3s;overflow:hidden}
+.svc:hover{transform:translateY(-6px);box-shadow:0 24px 48px -24px rgba(11,22,48,.35);border-color:transparent}
+.svc-num{position:absolute;top:22px;right:26px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:15px;color:#98A2B3}
+.svc-ico{width:56px;height:56px;border-radius:16px;background:#EDF1FF;color:var(--accent);display:grid;place-items:center;transition:background .3s,color .3s}
+.svc:hover .svc-ico{background:var(--accent);color:#fff}
+.svc h3{font-size:22px;font-weight:700;line-height:1.25;margin-top:8px}
+.svc p{margin:0;color:var(--muted);font-size:16px;line-height:1.6;flex:1}
+.svc a{font-weight:600;font-size:15px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;min-height:44px}
+.svc a:hover svg{transform:translateX(4px)}
+.svc a svg{transition:transform .2s}
+.svc-dark{background:var(--navy);border-color:var(--navy);color:#fff}
+.svc-dark p{color:var(--onnavy)}
+.svc-dark .svc-ico{background:rgba(255,255,255,.08);color:var(--hi)}
+.svc-dark a{color:var(--hi)}.svc-dark a:hover{color:#fff}
+
+/* WHY */
+.why-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:72px;align-items:start}
+.why-left h2{font-size:46px;line-height:1.1;font-weight:800}
+.why-left p{color:var(--muted);font-size:17px;line-height:1.65;margin:22px 0 32px}
+.why-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.why{background:#fff;border-radius:20px;padding:30px;border:1px solid var(--line);transition:border-color .3s}
+.why:hover{border-color:var(--accent)}
+.why b{display:block;font-family:'Plus Jakarta Sans',sans-serif;font-size:44px;font-weight:800;color:var(--accent);line-height:1;margin-bottom:18px}
+.why h4{font-size:19px;font-weight:700;line-height:1.3}
+.why p{color:var(--muted);font-size:15px;line-height:1.6;margin:10px 0 0}
+
+/* PROCESS */
+.proc{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;position:relative}
+.step{position:relative;padding-top:28px}
+.step-dot{width:64px;height:64px;border-radius:50%;background:var(--navy);color:var(--hi);display:grid;place-items:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:22px;position:relative;z-index:1;transition:transform .3s,background .3s}
+.step:hover .step-dot{transform:scale(1.08);background:var(--accent);color:#fff}
+.step-line{position:absolute;top:60px;left:64px;right:-24px;height:2px;background:repeating-linear-gradient(90deg,#C3CBDB 0 8px,transparent 8px 16px)}
+.step:last-child .step-line{display:none}
+.step h3{font-size:22px;font-weight:700;margin:26px 0 10px}
+.step p{color:var(--muted);font-size:16px;line-height:1.6;margin:0}
+
+/* SERVE */
+.serve-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.serve-card{border-radius:24px;padding:40px}
+.serve-card h3{font-size:26px;font-weight:800;margin-bottom:24px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;font-size:15px;font-weight:500;transition:transform .2s}
+.chip:hover{transform:translateY(-2px)}
+.serve-a{background:var(--navy);color:#fff}
+.serve-a .chip{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:#fff}
+.serve-b{background:#FFF6E3}
+.serve-b .chip{background:#fff;border:1px solid #F3DDB0;color:var(--ink)}
+
+/* VALUES — FAITH */
+.faith{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+.val{border-radius:22px;padding:30px 24px 28px;background:var(--navy2);border:1px solid rgba(255,255,255,.08);transition:transform .3s,background .3s}
+.val:hover{transform:translateY(-8px);background:var(--accent)}
+.val .L{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:84px;line-height:.9;color:var(--hi);display:block}
+.val:hover .L{color:#fff}
+.val h4{font-size:19px;font-weight:700;margin-top:22px;color:#fff}
+.val p{margin:8px 0 0;color:var(--onnavy);font-size:15px;line-height:1.55}
+.val:hover p{color:#E6ECFF}
+
+/* TESTIMONIALS */
+.t-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.t{background:#fff;border:1px solid var(--line);border-radius:22px;padding:34px;display:flex;flex-direction:column;gap:22px}
+.t-feature{background:var(--hi);border-color:var(--hi)}
+.t q{font-size:18px;line-height:1.6;quotes:none;flex:1;color:var(--ink)}
+.t-big{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:64px;line-height:1;letter-spacing:-0.03em}
+.t-who{display:flex;gap:14px;align-items:center;border-top:1px solid rgba(16,24,40,.12);padding-top:20px}
+.av{width:44px;height:44px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-weight:700;color:var(--accent);flex:none}
+.t-feature .av{background:rgba(255,255,255,.6)}
+.t-who b{display:block;font-size:15px}
+.t-who span{font-size:14px;color:var(--muted)}
+.t-feature .t-who span{color:#4A3A10}
+
+/* CTA */
+.cta{background:var(--accent);color:#fff;border-radius:32px;padding:80px 64px;position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:40px;align-items:center}
+.cta h2{font-size:54px;line-height:1.05;font-weight:800}
+.cta p{font-size:19px;line-height:1.6;color:#E3E9FF;margin:20px 0 0;max-width:560px}
+.cta-x{position:absolute;right:-40px;bottom:-120px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:420px;line-height:1;color:rgba(255,255,255,.08);pointer-events:none}
+.cta-actions{display:flex;flex-direction:column;gap:14px;align-items:flex-start;position:relative}
+
+/* FOOTER */
+.foot{background:var(--navy);color:var(--onnavy);padding:88px 0 32px;margin-top:112px}
+.foot-grid{display:grid;grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr));gap:48px}
+.foot h5{font-family:'Plus Jakarta Sans',sans-serif;color:#fff;font-size:15px;font-weight:700;margin:0 0 18px;letter-spacing:.02em}
+.foot ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.foot ul a{color:var(--onnavy);text-decoration:none;font-size:15px;display:inline-block;padding:6px 0;transition:color .2s,transform .2s}
+.foot ul a:hover{color:#fff;transform:translateX(4px)}
+.social{display:flex;gap:10px;margin-top:26px}
+.social a{width:44px;height:44px;border-radius:12px;border:1px solid rgba(255,255,255,.16);display:grid;place-items:center;color:#fff;transition:background .2s,border-color .2s}
+.social a:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.seal{display:inline-flex;align-items:center;gap:10px;margin-top:22px;padding:10px 14px;border-radius:12px;background:rgba(255,255,255,.05);font-size:13px;color:#DCE3F2}
+.foot-bot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.1);margin-top:64px;padding-top:26px;font-size:14px}
+
+/* RESPONSIVE */
+@media (max-width:1080px){
+  .hero-grid,.why-grid,.cta{grid-template-columns:minmax(0,1fr)}
+  .svc-grid,.t-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .faith{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .proc{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .step-line{display:none}
+  .foot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:680px){
+  .wrap{padding:0 16px}
+  .hero{padding:64px 0 80px}
+  .hero h1{font-size:40px}
+  .hl{white-space:normal}
+  .sec{padding:72px 0}
+  .sec-head h2,.why-left h2{font-size:34px}
+  .cta{padding:48px 24px}.cta h2{font-size:36px}
+  .svc-grid,.t-grid,.why-list,.serve-grid,.proc,.foot-grid{grid-template-columns:minmax(0,1fr)}
+  .faith{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pillar:nth-child(2),.pillar:nth-child(3){margin-left:0}
+  .times{padding-left:0}
+  .menu{display:none}
+  .serve-card{padding:28px}
+}
+@media (prefers-reduced-motion:reduce){.strip-in{animation:none}.mt *{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="mt" style="--accent: #2E5BFF; --hi: #FFB020; width: 100%">
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="wrap nav-in">
+      <a class="logo" href="#top" aria-label="Multiply Talents home">
+        <span class="logo-mark" aria-hidden="true">×</span>
+        <span class="logo-txt">Multiply Talents<span>Strategy · Talent · Automation</span></span>
+      </a>
+      <nav class="menu" aria-label="Main">
+        <a href="#services">Corporate Support</a>
+        <a href="#services">AEC Services</a>
+        <a href="#proof">Case Studies</a>
+        <a href="#resources">Resources</a>
+        <a href="#careers">Careers</a>
+        <a href="#about">About Us</a>
+      </nav>
+      <a class="btn btn-hi" href="#contact">Contact Us</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <span class="hero-x" aria-hidden="true" style="font-size: 520px; right: -60px; top: -120px">×</span>
+    <span class="hero-x" aria-hidden="true" style="font-size: 180px; left: 46%; bottom: -40px">×</span>
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow" style="color: var(--hi)"><i></i>Growth partners for ambitious businesses</span>
+        <h1>Scale faster through <span class="hl">strategy, talent</span> &amp; automation.</h1>
+        <p class="hero-sub">We partner with growth-focused organizations to drive measurable results — combining strategic consulting, digital execution and offshore expertise, without sacrificing values or people.</p>
+        <div class="cta-row">
+          <a class="btn btn-hi" href="#contact">Build Your Roadmap
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="#services">Explore Services</a>
+        </div>
+      </div>
+      <div class="pillars">
+        <div class="pillar">
+          <div class="p-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></div>
+          <div><h3>Strategy</h3><p>A data-driven plan tied to real business goals.</p></div>
+        </div>
+        <div class="times" aria-hidden="true">×</div>
+        <div class="pillar">
+          <div class="p-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14.5c2.3 0 4 1.5 4.6 4"/></svg></div>
+          <div><h3>Talent</h3><p>Global teams with local, hands-on accountability.</p></div>
+        </div>
+        <div class="times" aria-hidden="true">×</div>
+        <div class="pillar">
+          <div class="p-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div>
+          <div><h3>Automation</h3><p>Smart systems that free your people to grow.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES MARQUEE -->
+  <div class="strip" aria-label="Industries we serve">
+    <div class="strip-in">
+      <span>Real Estate &amp; Property</span><span>Home Services</span><span>E-commerce &amp; Retail</span><span>Health &amp; Wellness</span><span>Professional Services</span><span>Architecture, Engineering &amp; Construction</span>
+      <span aria-hidden="true">Real Estate &amp; Property</span><span aria-hidden="true">Home Services</span><span aria-hidden="true">E-commerce &amp; Retail</span><span aria-hidden="true">Health &amp; Wellness</span><span aria-hidden="true">Professional Services</span><span aria-hidden="true">Architecture, Engineering &amp; Construction</span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="sec" id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow kicker"><i></i>What we do</span>
+          <h2>Everything you need to grow — under one roof.</h2>
+        </div>
+        <p>From the boardroom plan to the back office, every engagement ties to measurable results.</p>
+      </div>
+      <div class="svc-grid">
+        <article class="svc">
+          <span class="svc-num">01</span>
+          <div class="svc-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6 16V10M11 16V6M16 16v-4M21 4l-5 5-3-3-4 4"/></svg></div>
+          <h3>Strategic Planning &amp; Development</h3>
+          <p>Turn your vision into a clear, data-driven plan your whole team can execute.</p>
+          <a href="#contact">Learn more <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+        <article class="svc svc-dark">
+          <span class="svc-num">02</span>
+          <div class="svc-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M10 6.5h4a3 3 0 0 1 3 3V14M14 17.5h-4a3 3 0 0 1-3-3V10"/></svg></div>
+          <h3>Digital Transformation &amp; Automation</h3>
+          <p>Modernize your tools and automate the busywork so your business can scale.</p>
+          <a href="#contact">Learn more <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+        <article class="svc">
+          <span class="svc-num">03</span>
+          <div class="svc-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11v2a1 1 0 0 0 1 1h3l6 5V5L7 10H4a1 1 0 0 0-1 1z"/><path d="M17 8.5a5 5 0 0 1 0 7M19.5 6a8.5 8.5 0 0 1 0 12"/></svg></div>
+          <h3>Social Media Marketing &amp; Lead Generation</h3>
+          <p>Campaigns and content that build your audience and fill your pipeline.</p>
+          <a href="#contact">Learn more <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+        <article class="svc">
+          <span class="svc-num">04</span>
+          <div class="svc-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 13h3M8 16h6"/></svg></div>
+          <h3>Back Office Support for Scaling</h3>
+          <p>Admin, HR and data support from dedicated offshore teams.</p>
+          <a href="#contact">Learn more <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+        <article class="svc">
+          <span class="svc-num">05</span>
+          <div class="svc-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <h3>IT Solutions &amp; Network Security</h3>
+          <p>Secure, reliable systems that keep downtime low and data protected.</p>
+          <a href="#contact">Learn more <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+        <article class="svc svc-dark">
+          <span class="svc-num">06</span>
+          <div class="svc-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V9l7-5 7 5v12"/><path d="M9 21v-6h6v6M9 11h.01M15 11h.01"/></svg></div>
+          <h3>BIM &amp; AEC Outsourcing</h3>
+          <p>BIM, VDC, architectural and engineering teams for AEC firms — with full project coordination.</p>
+          <a href="#contact">Learn more <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="sec sec-soft" id="about">
+    <div class="wrap why-grid">
+      <div class="why-left">
+        <span class="eyebrow kicker"><i></i>Why work with us</span>
+        <h2>A partner invested in your outcomes — not just your tasks.</h2>
+        <p>We pair offshore efficiency with hands-on leadership, so you get the capacity of a global team and the care of a local one.</p>
+        <a class="btn btn-blue" href="#contact">Talk to a strategist</a>
+      </div>
+      <div class="why-list">
+        <div class="why"><b>01</b><h4>Strategy first, execution second</h4><p>Every solution is aligned with your real business goals.</p></div>
+        <div class="why"><b>02</b><h4>Outcome-focused engagements</h4><p>Each service ties back to results you can measure.</p></div>
+        <div class="why"><b>03</b><h4>Global talent, local accountability</h4><p>Offshore efficiency with hands-on leadership.</p></div>
+        <div class="why"><b>04</b><h4>Values-driven partnership</h4><p>Growth that honors people, purpose and stewardship.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="sec" id="process">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow kicker"><i></i>How we work</span>
+          <h2>From first call to full scale, in four steps.</h2>
+        </div>
+        <p>A clear, repeatable process — so you always know what's next.</p>
+      </div>
+      <div class="proc">
+        <div class="step"><span class="step-line" aria-hidden="true"></span><div class="step-dot">1</div><h3>Discovery</h3><p>We uncover your goals, challenges and what success looks like.</p></div>
+        <div class="step"><span class="step-line" aria-hidden="true"></span><div class="step-dot">2</div><h3>Strategy</h3><p>A tailored plan covering tools, workflows and automation.</p></div>
+        <div class="step"><span class="step-line" aria-hidden="true"></span><div class="step-dot">3</div><h3>Implementation</h3><p>We build, launch, integrate, test — and train your team.</p></div>
+        <div class="step"><span class="step-line" aria-hidden="true"></span><div class="step-dot">4</div><h3>Support</h3><p>Ongoing optimization as your business keeps scaling.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO WE SERVE -->
+  <section class="sec" style="padding-top: 0">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow kicker"><i></i>Who we serve</span>
+          <h2>Built for businesses ready to grow.</h2>
+        </div>
+      </div>
+      <div class="serve-grid">
+        <div class="serve-card serve-a">
+          <h3>Industries</h3>
+          <div class="chips">
+            <span class="chip">Real estate &amp; property management</span>
+            <span class="chip">Home services</span>
+            <span class="chip">E-commerce &amp; retail</span>
+            <span class="chip">Health &amp; wellness</span>
+            <span class="chip">Professional services</span>
+            <span class="chip">AEC firms</span>
+          </div>
+        </div>
+        <div class="serve-card serve-b">
+          <h3>Business types</h3>
+          <div class="chips">
+            <span class="chip">Startups &amp; SMEs</span>
+            <span class="chip">Service-based businesses</span>
+            <span class="chip">E-commerce stores</span>
+            <span class="chip">Agencies &amp; consultants</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="sec" style="background: var(--navy); color: #fff">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow" style="color: var(--hi); margin-bottom: 16px"><i></i>Our core values</span>
+          <h2 style="color: #fff">We lead with <span style="color: var(--hi)">F.A.I.T.H.</span></h2>
+        </div>
+        <p style="color: var(--onnavy)">Five values that shape how we plan, deliver and partner.</p>
+      </div>
+      <div class="faith">
+        <div class="val"><span class="L">F</span><h4>Foresight</h4><p>A forward-thinking mindset in every plan.</p></div>
+        <div class="val"><span class="L">A</span><h4>Accountability</h4><p>We deliver what we promise.</p></div>
+        <div class="val"><span class="L">I</span><h4>Integrity</h4><p>Honesty and transparency, always.</p></div>
+        <div class="val"><span class="L">T</span><h4>Transformation</h4><p>Digital innovation that moves you forward.</p></div>
+        <div class="val"><span class="L">H</span><h4>Holistic Approach</h4><p>Sustainable solutions for the whole business.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="sec sec-soft" id="proof">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow kicker"><i></i>Client results</span>
+          <h2>Growth our clients can see.</h2>
+        </div>
+        <a class="btn btn-blue" href="#proof">View case studies</a>
+      </div>
+      <div class="t-grid">
+        <figure class="t" style="margin: 0">
+          <q>They gave us a clear strategy, and the campaigns that followed brought in more leads than we expected.</q>
+          <figcaption class="t-who"><span class="av">[A]</span><div><b>[Client name]</b><span>[Role, Company]</span></div></figcaption>
+        </figure>
+        <figure class="t t-feature" style="margin: 0">
+          <div class="t-big">+150%</div>
+          <q>Website traffic grew 150% in just three months after working with Multiply Talents.</q>
+          <figcaption class="t-who"><span class="av">[B]</span><div><b>[Client name]</b><span>[Role, Company]</span></div></figcaption>
+        </figure>
+        <figure class="t" style="margin: 0">
+          <q>Their SEO and content work delivered outstanding results for our business.</q>
+          <figcaption class="t-who"><span class="av">[C]</span><div><b>[Client name]</b><span>[Role, Company]</span></div></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding-top: 112px" id="contact">
+    <div class="wrap">
+      <div class="cta">
+        <span class="cta-x" aria-hidden="true">×</span>
+        <div style="position: relative">
+          <h2>Ready to multiply your impact?</h2>
+          <p>Whether you need strategy, systems or scale — we'll help you grow smarter.</p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn btn-hi" href="#contact" style="min-height: 56px; padding: 0 30px; font-size: 16px">Build Your Roadmap With Us
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <span style="font-size: 14px; color: #E3E9FF">Free discovery call · No commitment</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <a class="logo" href="#top" aria-label="Multiply Talents home">
+            <span class="logo-mark" aria-hidden="true">×</span>
+            <span class="logo-txt">Multiply Talents<span>Strategy · Talent · Automation</span></span>
+          </a>
+          <p style="font-size: 15px; line-height: 1.65; margin: 22px 0 0; max-width: 340px">Helping businesses scale with strategy, smart systems and offshore teams.</p>
+          <div class="social">
+            <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h-2.5A3.5 3.5 0 0 0 9 6.5V10H6v4h3v7h4v-7h3l1-4h-4V7a1 1 0 0 1 1-1h2z"/></svg></a>
+            <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a>
+            <a href="#" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7h.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg></a>
+            <a href="#" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3z"/></svg></a>
+          </div>
+          <div class="seal">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/></svg>
+            DPO/DPS Registered · Multiply Talents OPC
+          </div>
+        </div>
+        <div>
+          <h5>Corporate Support</h5>
+          <ul>
+            <li><a href="#services">Digital Transformation</a></li>
+            <li><a href="#services">Digital Marketing</a></li>
+            <li><a href="#services">Back Office Support</a></li>
+            <li><a href="#services">IT Solutions</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>AEC Services</h5>
+          <ul>
+            <li><a href="#services">BIM &amp; VDC Services</a></li>
+            <li><a href="#services">Architectural Services</a></li>
+            <li><a href="#services">Engineering Hub</a></li>
+            <li><a href="#services">Specialized Services</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Company</h5>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#proof">Case Studies</a></li>
+            <li><a href="#resources">Blogs &amp; Articles</a></li>
+            <li><a href="#careers">Careers</a></li>
+            <li><a href="#contact">Contact · [EMAIL]</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bot">
+        <span>© 2026 Multiply Talents. All rights reserved.</span>
+        <span>Made in the Philippines · PH</span>
+      </div>
+    </div>
+  </footer>
+</div>
+</body>
+</html>
