@@ -7,25 +7,42 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap">
 <style>
+html{scroll-behavior:smooth}
 body{margin:0}
 a{color:#2E5BFF}a:hover{color:#1A3FD1}
 .mt{--navy:#0B1630;--navy2:#13224A;--ink:#101828;--muted:#475467;--line:#E4E7EE;--soft:#F5F7FB;--onnavy:#B9C4DC;font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased}
 .mt *{box-sizing:border-box}
 .mt h1,.mt h2,.mt h3,.mt h4{font-family:'Plus Jakarta Sans','Inter',sans-serif;margin:0;letter-spacing:-0.02em}
+.mt [id]{scroll-margin-top:96px}
 .wrap{max-width:1240px;margin:0 auto;padding:0 32px}
 
 /* NAV */
-.nav{background:var(--navy);border-bottom:1px solid rgba(255,255,255,.08)}
-.nav-in{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:18px 0}
+.nav{background:var(--navy);border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;z-index:100;transition:box-shadow .3s}
+.nav.scrolled{box-shadow:0 10px 30px -12px rgba(0,0,0,.55)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 0}
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff}
 .logo:hover{color:#fff}
 .logo-mark{width:40px;height:40px;border-radius:10px;background:var(--accent);display:grid;place-items:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:22px;color:#fff;transform:rotate(-6deg);transition:transform .3s}
 .logo:hover .logo-mark{transform:rotate(0)}
 .logo-txt{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:19px;line-height:1.05}
 .logo-txt span{display:block;font-weight:500;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--onnavy);margin-top:3px}
-.menu{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
-.menu a{color:#DCE3F2;text-decoration:none;font-size:15px;font-weight:500;padding:10px 14px;border-radius:8px;transition:background .2s,color .2s;min-height:44px;display:inline-flex;align-items:center}
-.menu a:hover{background:rgba(255,255,255,.08);color:#fff}
+.menu{display:flex;gap:4px;align-items:center}
+.menu a,.dd-btn{color:#DCE3F2;text-decoration:none;font-size:15px;font-weight:500;padding:10px 14px;border-radius:8px;transition:background .2s,color .2s;min-height:44px;display:inline-flex;align-items:center}
+.menu a:hover,.dd-btn:hover{background:rgba(255,255,255,.08);color:#fff}
+.dd{position:relative}
+.dd-btn{background:none;border:0;font-family:inherit;cursor:pointer;gap:6px}
+.dd-btn svg{transition:transform .2s}
+.dd.open .dd-btn svg{transform:rotate(180deg)}
+.dd-menu{position:absolute;top:calc(100% + 10px);left:-8px;width:330px;background:#fff;border-radius:18px;padding:8px;box-shadow:0 28px 60px -20px rgba(11,22,48,.55);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s,transform .2s,visibility .2s}
+.dd-menu::before{content:'';position:absolute;left:0;right:0;top:-12px;height:12px}
+.dd.open .dd-menu{opacity:1;visibility:visible;transform:none}
+.menu .dd-menu a{display:flex;flex-direction:column;align-items:flex-start;gap:2px;color:var(--ink);padding:12px 14px;border-radius:12px}
+.menu .dd-menu a b{font-weight:600;font-size:15px}
+.menu .dd-menu a span{font-size:13px;color:var(--muted)}
+.menu .dd-menu a:hover{background:var(--soft);color:var(--accent)}
+.menu-contact{display:none!important}
+.nav-toggle{display:none;width:44px;height:44px;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:transparent;color:#fff;cursor:pointer;place-items:center}
+@media (min-width:1081px){.dd:hover .dd-menu,.dd:focus-within .dd-menu{opacity:1;visibility:visible;transform:none}}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 24px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;transition:transform .2s,box-shadow .2s,background .2s;cursor:pointer;border:0;font-family:inherit}
 .btn:hover{transform:translateY(-2px)}
 .btn-hi{background:var(--hi);color:#1A1200}
@@ -165,6 +182,17 @@ a{color:#2E5BFF}a:hover{color:#1A3FD1}
 
 /* RESPONSIVE */
 @media (max-width:1080px){
+  .nav-toggle{display:grid}
+  .nav-in{flex-wrap:wrap}
+  .menu{display:none;order:3;flex-basis:100%;flex-direction:column;align-items:stretch;gap:2px;padding:8px 0 12px;border-top:1px solid rgba(255,255,255,.1);max-height:calc(100vh - 80px);overflow-y:auto}
+  .nav.open .menu{display:flex}
+  .menu a,.dd-btn{width:100%;justify-content:space-between}
+  .dd-menu{position:static;width:auto;opacity:1;visibility:visible;transform:none;display:none;box-shadow:none;background:rgba(255,255,255,.04);margin:4px 0 6px}
+  .dd.open .dd-menu{display:block}
+  .menu .dd-menu a{color:#fff}
+  .menu .dd-menu a span{color:var(--onnavy)}
+  .menu .dd-menu a:hover{background:rgba(255,255,255,.08);color:var(--hi)}
+  .nav-cta{margin-left:auto}
   .hero-grid,.why-grid,.cta{grid-template-columns:minmax(0,1fr)}
   .svc-grid,.t-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .faith{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -184,10 +212,14 @@ a{color:#2E5BFF}a:hover{color:#1A3FD1}
   .faith{grid-template-columns:repeat(2,minmax(0,1fr))}
   .pillar:nth-child(2),.pillar:nth-child(3){margin-left:0}
   .times{padding-left:0}
-  .menu{display:none}
   .serve-card{padding:28px}
 }
-@media (prefers-reduced-motion:reduce){.strip-in{animation:none}.mt *{transition:none!important}}
+@media (max-width:520px){
+  .nav-cta{display:none}
+  .menu-contact{display:inline-flex!important;margin-top:8px;justify-content:center!important;background:var(--hi);color:#1A1200!important}
+  .logo-txt span{display:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.strip-in{animation:none}.mt *{transition:none!important}}
 </style>
 </head>
 <body>
@@ -201,15 +233,25 @@ a{color:#2E5BFF}a:hover{color:#1A3FD1}
         <span class="logo-mark" aria-hidden="true">×</span>
         <span class="logo-txt">Multiply Talents<span>Strategy · Talent · Automation</span></span>
       </a>
-      <nav class="menu" aria-label="Main">
+      <nav class="menu" id="menu" aria-label="Main">
         <a href="#services">Corporate Support</a>
-        <a href="#services">AEC Services</a>
+        <div class="dd">
+          <button class="dd-btn" type="button" aria-expanded="false" aria-controls="dd-aec">AEC Services <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="dd-menu" id="dd-aec">
+            <a href="aec-services/bim-vdc-services.html"><b>BIM &amp; VDC Services</b><span>3D modeling, clash detection, Scan-to-BIM</span></a>
+            <a href="aec-services/architectural-design-services.html"><b>Architectural Services</b><span>From concept to construction documents</span></a>
+            <a href="aec-services/engineering-services.html"><b>Engineering Hub</b><span>Structural, MEP &amp; Civil engineering</span></a>
+            <a href="aec-services/specialized-aec-services.html"><b>Specialized Services</b><span>Sustainability &amp; project management</span></a>
+          </div>
+        </div>
         <a href="#proof">Case Studies</a>
         <a href="#resources">Resources</a>
         <a href="#careers">Careers</a>
         <a href="#about">About Us</a>
+        <a class="menu-contact" href="#contact">Contact Us</a>
       </nav>
-      <a class="btn btn-hi" href="#contact">Contact Us</a>
+      <a class="btn btn-hi nav-cta" href="#contact">Contact Us</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div>
   </header>
 
@@ -307,7 +349,7 @@ a{color:#2E5BFF}a:hover{color:#1A3FD1}
           <div class="svc-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V9l7-5 7 5v12"/><path d="M9 21v-6h6v6M9 11h.01M15 11h.01"/></svg></div>
           <h3>BIM &amp; AEC Outsourcing</h3>
           <p>BIM, VDC, architectural and engineering teams for AEC firms — with full project coordination.</p>
-          <a href="#contact">Learn more <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="aec-services/bim-vdc-services.html">Learn more <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </article>
       </div>
     </div>
@@ -484,10 +526,10 @@ a{color:#2E5BFF}a:hover{color:#1A3FD1}
         <div>
           <h5>AEC Services</h5>
           <ul>
-            <li><a href="#services">BIM &amp; VDC Services</a></li>
-            <li><a href="#services">Architectural Services</a></li>
-            <li><a href="#services">Engineering Hub</a></li>
-            <li><a href="#services">Specialized Services</a></li>
+            <li><a href="aec-services/bim-vdc-services.html">BIM &amp; VDC Services</a></li>
+            <li><a href="aec-services/architectural-design-services.html">Architectural Services</a></li>
+            <li><a href="aec-services/engineering-services.html">Engineering Hub</a></li>
+            <li><a href="aec-services/specialized-aec-services.html">Specialized Services</a></li>
           </ul>
         </div>
         <div>
@@ -508,5 +550,27 @@ a{color:#2E5BFF}a:hover{color:#1A3FD1}
     </div>
   </footer>
 </div>
+<script>
+(function () {
+  var nav = document.querySelector('.nav');
+  var toggle = nav.querySelector('.nav-toggle');
+  var dd = nav.querySelector('.dd');
+  var ddBtn = dd.querySelector('.dd-btn');
+  function setDd(open) { dd.classList.toggle('open', open); ddBtn.setAttribute('aria-expanded', open); }
+  function setNav(open) {
+    nav.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open);
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+  toggle.addEventListener('click', function () { setNav(!nav.classList.contains('open')); });
+  ddBtn.addEventListener('click', function (e) { e.stopPropagation(); setDd(!dd.classList.contains('open')); });
+  document.addEventListener('click', function (e) { if (!dd.contains(e.target)) setDd(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { setDd(false); setNav(false); } });
+  nav.querySelectorAll('.menu a').forEach(function (a) { a.addEventListener('click', function () { setNav(false); setDd(false); }); });
+  function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 8); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
 </body>
 </html>
