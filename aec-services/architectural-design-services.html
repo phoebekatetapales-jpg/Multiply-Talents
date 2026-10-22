@@ -22,7 +22,16 @@
         <span class="logo-txt">Multiply Talents<span>Strategy · Talent · Automation</span></span>
       </a>
       <nav class="menu" id="menu" aria-label="Main">
-        <a href="../index.html#services">Corporate Support</a>
+        <div class="dd">
+          <button class="dd-btn" type="button" aria-expanded="false" aria-controls="dd-corp">Corporate Support <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="dd-menu" id="dd-corp">
+            <a href="https://multiplytalents.io/digital-transformation"><b>Digital Transformation</b><span>Modern tools &amp; workflow automation</span></a>
+            <a href="https://multiplytalents.io/digital-marketing"><b>Digital Marketing</b><span>Social media, content &amp; lead generation</span></a>
+            <a href="https://multiplytalents.io/aec-services"><b>AEC Services</b><span>BIM, architecture &amp; engineering support</span></a>
+            <a href="https://multiplytalents.io/back-office-support"><b>Back Office Support</b><span>Admin, HR &amp; data support teams</span></a>
+            <a href="https://multiplytalents.io/it-solutions"><b>IT Solutions</b><span>Secure, reliable systems &amp; networks</span></a>
+          </div>
+        </div>
         <div class="dd">
           <button class="dd-btn" type="button" aria-expanded="false" aria-controls="dd-aec">AEC Services <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
           <div class="dd-menu" id="dd-aec">
@@ -240,19 +249,25 @@
 (function () {
   var nav = document.querySelector('.nav');
   var toggle = nav.querySelector('.nav-toggle');
-  var dd = nav.querySelector('.dd');
-  var ddBtn = dd.querySelector('.dd-btn');
-  function setDd(open) { dd.classList.toggle('open', open); ddBtn.setAttribute('aria-expanded', open); }
+  var dds = Array.prototype.slice.call(nav.querySelectorAll('.dd'));
+  function setDd(dd, open) { dd.classList.toggle('open', open); dd.querySelector('.dd-btn').setAttribute('aria-expanded', open); }
+  function closeAll(except) { dds.forEach(function (d) { if (d !== except) setDd(d, false); }); }
   function setNav(open) {
     nav.classList.toggle('open', open);
     toggle.setAttribute('aria-expanded', open);
     toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   }
   toggle.addEventListener('click', function () { setNav(!nav.classList.contains('open')); });
-  ddBtn.addEventListener('click', function (e) { e.stopPropagation(); setDd(!dd.classList.contains('open')); });
-  document.addEventListener('click', function (e) { if (!dd.contains(e.target)) setDd(false); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { setDd(false); setNav(false); } });
-  nav.querySelectorAll('.menu a').forEach(function (a) { a.addEventListener('click', function () { setNav(false); setDd(false); }); });
+  dds.forEach(function (dd) {
+    dd.querySelector('.dd-btn').addEventListener('click', function (e) {
+      e.stopPropagation();
+      closeAll(dd);
+      setDd(dd, !dd.classList.contains('open'));
+    });
+  });
+  document.addEventListener('click', function (e) { if (!nav.contains(e.target)) closeAll(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeAll(); setNav(false); } });
+  nav.querySelectorAll('.menu a').forEach(function (a) { a.addEventListener('click', function () { setNav(false); closeAll(); }); });
   function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 8); }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
