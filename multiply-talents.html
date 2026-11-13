@@ -151,18 +151,6 @@ a{color:#2E5BFF}a:hover{color:#1A3FD1}
 .val p{margin:8px 0 0;color:var(--onnavy);font-size:15px;line-height:1.55}
 .val:hover p{color:#E6ECFF}
 
-/* TESTIMONIALS */
-.t-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-.t{background:#fff;border:1px solid var(--line);border-radius:22px;padding:34px;display:flex;flex-direction:column;gap:22px}
-.t-feature{background:var(--hi);border-color:var(--hi)}
-.t q{font-size:18px;line-height:1.6;quotes:none;flex:1;color:var(--ink)}
-.t-big{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:64px;line-height:1;letter-spacing:-0.03em}
-.t-who{display:flex;gap:14px;align-items:center;border-top:1px solid rgba(16,24,40,.12);padding-top:20px}
-.av{width:44px;height:44px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-weight:700;color:var(--accent);flex:none}
-.t-feature .av{background:rgba(255,255,255,.6)}
-.t-who b{display:block;font-size:15px}
-.t-who span{font-size:14px;color:var(--muted)}
-.t-feature .t-who span{color:#4A3A10}
 
 /* CTA */
 .cta{background:var(--accent);color:#fff;border-radius:32px;padding:80px 64px;position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:40px;align-items:center}
@@ -209,7 +197,7 @@ a{color:#2E5BFF}a:hover{color:#1A3FD1}
   .menu .dd-menu a:hover{background:rgba(255,255,255,.08);color:var(--hi)}
   .nav-cta{margin-left:auto}
   .hero-grid,.why-grid,.cta,.cta.cta-book{grid-template-columns:minmax(0,1fr)}
-  .svc-grid,.t-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .faith{grid-template-columns:repeat(3,minmax(0,1fr))}
   .proc{grid-template-columns:repeat(2,minmax(0,1fr))}
   .step-line{display:none}
@@ -249,9 +237,7 @@ a{color:#2E5BFF}a:hover{color:#1A3FD1}
   .cta-book>div:first-of-type{padding:0 8px}
   .book-card{padding:4px;border-radius:18px}
   .book-card iframe{min-height:760px}
-  .t-grid,.serve-grid{grid-template-columns:minmax(0,1fr)}
-  .t{padding:28px 24px}
-  .t-big{font-size:52px}
+  .serve-grid{grid-template-columns:minmax(0,1fr)}
   /* services: 2-up compact cards */
   .svc-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .svc{padding:18px 16px 12px;gap:8px;border-radius:16px}
@@ -337,7 +323,6 @@ a{color:#2E5BFF}a:hover{color:#1A3FD1}
             <a href="aec-services/specialized-aec-services.html"><b>Specialized Services</b><span>Sustainability &amp; project management</span></a>
           </div>
         </div>
-        <a href="#proof">Case Studies</a>
         <a href="careers.html">Careers</a>
         <a href="about-us.html">About Us</a>
         <a class="menu-contact" href="#contact">Contact Us</a>
@@ -538,33 +523,6 @@ a{color:#2E5BFF}a:hover{color:#1A3FD1}
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
-  <section class="sec sec-soft" id="proof">
-    <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <span class="eyebrow kicker"><i></i>Client results</span>
-          <h2>Growth our clients can see.</h2>
-        </div>
-        <a class="btn btn-blue" href="#proof">View case studies</a>
-      </div>
-      <div class="t-grid">
-        <figure class="t" style="margin: 0">
-          <q>They gave us a clear strategy, and the campaigns that followed brought in more leads than we expected.</q>
-          <figcaption class="t-who"><span class="av">[A]</span><div><b>[Client name]</b><span>[Role, Company]</span></div></figcaption>
-        </figure>
-        <figure class="t t-feature" style="margin: 0">
-          <div class="t-big">+150%</div>
-          <q>Website traffic grew 150% in just three months after working with Multiply Talents.</q>
-          <figcaption class="t-who"><span class="av">[B]</span><div><b>[Client name]</b><span>[Role, Company]</span></div></figcaption>
-        </figure>
-        <figure class="t" style="margin: 0">
-          <q>Their SEO and content work delivered outstanding results for our business.</q>
-          <figcaption class="t-who"><span class="av">[C]</span><div><b>[Client name]</b><span>[Role, Company]</span></div></figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
 
   <!-- CTA -->
   <section class="cta-sec" id="contact">
@@ -632,7 +590,6 @@ a{color:#2E5BFF}a:hover{color:#1A3FD1}
           <h5>Company</h5>
           <ul>
             <li><a href="about-us.html">About Us</a></li>
-            <li><a href="#proof">Case Studies</a></li>
             <li><a href="#resources">Blogs &amp; Articles</a></li>
             <li><a href="careers.html">Careers</a></li>
             <li><a href="#contact">Contact · [EMAIL]</a></li>
